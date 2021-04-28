@@ -61,7 +61,6 @@ public class ChatAdapter extends BaseAdapter {
         tvMsg.setText(item.getMessage());
         tvTime.setText(item.getTime());
 
-
         return itemView;
     }
 }

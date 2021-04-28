@@ -24,8 +24,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String lifeCycleTag ="Main Activity";
-    private String tag ="MainActivity Message";
+    private String lifeCycleTag = "Main Activity";
+    private String tag = "MainActivity Message";
 
     private long backKeyPressedTime = 0;
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 for (DataSnapshot message : dataSnapshot.getChildren()) {
                     String str1 = (String) message.child("title").getValue();
                     String str2 = (String) message.child("content").getValue();
-                    String str3=(String)message.child("uid").getValue();
+                    String str3 = (String) message.child("uid").getValue();
                     String key = message.getKey();
                     keyList.add(key);
                     titleList.add(str1);
@@ -102,6 +102,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(lifeCycleTag, "In the onStart() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(lifeCycleTag, "In the onRestart() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(lifeCycleTag, "In the onResume() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(lifeCycleTag, "In the onPause() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(lifeCycleTag, "In the onStop() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(lifeCycleTag, "In the onDestroy() event");  // life cycle 확인용
     }
 
     @Override
@@ -152,14 +182,16 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new RecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
-                // ****데이터를 번들에 넣어서 보내는걸로 교체해보기****
+                //****추가적인 정보 더 보내기
                 Intent intent = new Intent(getApplicationContext(), PostInfoActivity.class);
+                Bundle bundle=new Bundle();
 
-                intent.putExtra("title", titleList.get(pos));
-                intent.putExtra("content", contentList.get(pos));
-                intent.putExtra("key", keyList.get(pos));
-                intent.putExtra("uid",uidList.get(pos));
+                bundle.putString("title", titleList.get(pos));
+                bundle.putString("content", contentList.get(pos));
+                bundle.putString("key", keyList.get(pos));
+                bundle.putString("uid", uidList.get(pos));
 
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

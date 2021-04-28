@@ -1,6 +1,7 @@
 package com.mpproject.delivery_together;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,9 @@ import java.util.HashMap;
 
 public class PostWriteActivity extends AppCompatActivity {
 
+    private String lifeCycleTag ="PostWrite Activity";
+    private String tag ="PostWriteActivity Message";
+
     private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
 
@@ -32,6 +36,7 @@ public class PostWriteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_write);
+        Log.d(lifeCycleTag, "In the onCreate() event");  // life cycle 확인용
 
         //완료 버튼을 누르면
         Button writeBtn = findViewById(R.id.completeBtn);
@@ -43,6 +48,7 @@ public class PostWriteActivity extends AppCompatActivity {
         writeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(tag, "Write Button Clicked");  // 게시물 등록 버튼 눌림
                 //게시글의 정보를 가져온다
                 EditText titleEditText = (EditText) findViewById(R.id.writeTitle);
                 EditText contentEditText = (EditText) findViewById(R.id.writeContent);
@@ -69,7 +75,8 @@ public class PostWriteActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                // Write was successful!
+                                Log.d(tag, "Write Success");  // 게시물 등록 성공
+
                                 Toast.makeText(getApplicationContext(), "게시물을 등록했습니다", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
@@ -77,12 +84,49 @@ public class PostWriteActivity extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                // Write failed
+                                Log.d(tag, "Write Failed");  // 게시물 등록 실패
+
                                 Toast.makeText(getApplicationContext(), "게시물 등록 실패", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         });
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(lifeCycleTag, "In the onStart() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(lifeCycleTag, "In the onRestart() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(lifeCycleTag, "In the onResume() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(lifeCycleTag, "In the onPause() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(lifeCycleTag, "In the onStop() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(lifeCycleTag, "In the onDestroy() event");  // life cycle 확인용
     }
 }

@@ -19,11 +19,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
-    private String lifeCycleTag ="Login Activity";
-    private String tag ="LoginActivity Message";
+    private String lifeCycleTag = "Login Activity";
+    private String tag = "LoginActivity Message";
 
-    private long backKeyPressedTime=0;
-    
+    private long backKeyPressedTime = 0;
+
     private Button loginBtn;
     private Button forgot;
     private Button register;
@@ -56,28 +56,18 @@ public class LoginActivity extends AppCompatActivity {
                 String email = emailEditText.getText().toString().trim();
                 String pwd = passwordEditText.getText().toString().trim();
 
-                if(email.length()==0)
-                {
-                    Toast.makeText(getApplicationContext(),"이메일을 입력하세요",Toast.LENGTH_SHORT).show();
+                if (email.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "이메일을 입력하세요", Toast.LENGTH_SHORT).show();
                     Log.d(tag, "Not Input Email");  // 이메일 입력 안됨
-                }
-
-
-                else if(pwd.length()==0)
-                {
-                    Toast.makeText(getApplicationContext(),"비밀번호를 입력하세요",Toast.LENGTH_SHORT).show();
+                } else if (pwd.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
                     Log.d(tag, "Not Input Password Failed");  // 비밀번호 입력 안됨
-                }
-
-
-                else
-                {
+                } else {
                     firebaseAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             //성공했을때
-                            if (task.isSuccessful())
-                            {
+                            if (task.isSuccessful()) {
                                 Log.d(tag, "Login Success");  // 로그인 성공
 
                                 //로그인 화면은 닫고 메인 화면으로 넘어감
@@ -86,9 +76,8 @@ public class LoginActivity extends AppCompatActivity {
                                 finish();
                             }
                             //실패했을때
-                            else
-                            {
-                                Toast.makeText(getApplicationContext(),"이메일 또는 비밀번호가 틀렸습니다",Toast.LENGTH_SHORT).show();
+                            else {
+                                Toast.makeText(getApplicationContext(), "이메일 또는 비밀번호가 틀렸습니다", Toast.LENGTH_SHORT).show();
                                 Log.d(tag, "Login Failed");  // 로그인 실패
                             }
 
@@ -129,17 +118,42 @@ public class LoginActivity extends AppCompatActivity {
         //이미 로그인 되어있다면 로그인 후 상황으로 업데이트
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        if(currentUser!=null)
-        {
+        if (currentUser != null) {
             Log.d(tag, "Auto Login");  // 자동 로그인
             updateUI(currentUser);
-        }
-
-        else
+        } else
             Log.d(tag, "Need Login");  // 로그인 필요
     }
 
-    //다른 life cycle도 추가
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d(lifeCycleTag, "In the onRestart() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(lifeCycleTag, "In the onResume() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(lifeCycleTag, "In the onPause() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(lifeCycleTag, "In the onStop() event");  // life cycle 확인용
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(lifeCycleTag, "In the onDestroy() event");  // life cycle 확인용
+    }
 
     @Override
     public void onBackPressed() {
@@ -162,17 +176,15 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void updateUI(FirebaseUser user)
-    {
+    private void updateUI(FirebaseUser user) {
         //로그인 된 상태가 아니라면
-        if(user==null)
+        if (user == null)
             Log.d(tag, "UPdate UI Error");  // UI 업데이트 오류 발생
 
-        // 로그인 되어 있는 상태라면
-        // 메인 페이지로 넘어감
-        // 로그인 페이지는 닫아서 메인 페이지에서 나가면 앱이 종료되게 함
-        else
-        {
+            // 로그인 되어 있는 상태라면
+            // 메인 페이지로 넘어감
+            // 로그인 페이지는 닫아서 메인 페이지에서 나가면 앱이 종료되게 함
+        else {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
