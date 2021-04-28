@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "895222116244",
+    "firebase_url": "https://deliverytogether-5e77b-default-rtdb.firebaseio.com",
+    "project_id": "deliverytogether-5e77b",
+    "storage_bucket": "deliverytogether-5e77b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895222116244:android:8924c7b4f3cb47f54fa981",
+        "android_client_info": {
+          "package_name": "com.mpproject.delivery_together"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895222116244-5tfqh22oim8iue3irtsit3vts2feb6t8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNVtVuhFU8VPdFN6C3OSGSB9edsmDF0BI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895222116244-5tfqh22oim8iue3irtsit3vts2feb6t8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
