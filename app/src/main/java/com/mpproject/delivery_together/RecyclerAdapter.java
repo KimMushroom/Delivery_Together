@@ -14,13 +14,16 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
    //item list
     private ArrayList<RecyclerItem> postList = new ArrayList();
+    int layoutType = 0;
 
     public interface OnItemClickListener
     {
         void onItemClick(View v, int pos);
     }
 
-
+    public void switchLayout(int position) {
+        layoutType = position;
+    }
     // 리스너 객체 참조를 저장하는 변수
     private OnItemClickListener mListener = null;
     public void setOnItemClickListener(OnItemClickListener listener)
