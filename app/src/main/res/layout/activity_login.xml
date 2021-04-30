@@ -9,45 +9,51 @@
     <TextView
         android:id="@+id/loginTextView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:background="@color/pink"
         android:gravity="center"
-        android:text="로그인"/>
+        android:text="Delivery Together"
+        android:layout_gravity="center_vertical"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="590dp"
+        android:orientation="vertical"
+        android:padding="50dp">
 
         <EditText
             android:id="@+id/inputEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:padding="10dp"
             android:gravity="left"
-            android:textSize="15dp"
-            android:hint="이메일"/>
+            android:hint="이메일"
+            android:padding="10dp"
+            android:textSize="15dp" />
 
         <EditText
             android:id="@+id/inputPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:padding="10dp"
             android:gravity="left"
-            android:textSize="15dp"
-            android:hint="비밀번호"/>
+            android:hint="비밀번호"
+            android:padding="10dp"
+            android:textSize="15dp" />
 
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="확인"/>
+            android:background="@color/pink"
+            android:text="확인" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
             <Button
@@ -55,15 +61,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="회원가입"/>
+                android:background="@color/pink"
+                android:text="회원가입" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp"/>
+
 
             <Button
                 android:id="@+id/goForgotBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="143dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity=""
                 android:layout_margin="10dp"
-                android:text="이메일/비밀번호 찾기"
-                android:gravity="right"/>
+                android:background="@color/pink"
+                android:gravity="center"
+                android:text="이메일/비밀번호 찾기" />
 
         </LinearLayout>
 
