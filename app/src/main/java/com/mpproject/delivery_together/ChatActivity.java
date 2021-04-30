@@ -71,8 +71,10 @@ public class ChatActivity extends AppCompatActivity {
         chatRef= FirebaseDatabase.getInstance().getReference();
         firebaseAuth=FirebaseAuth.getInstance();
 
+
         adapter = new ChatAdapter(messageItemList,getLayoutInflater());
         messageListView.setAdapter(adapter);
+
 
         //firebaseDB에서 채팅 메세지들 실시간 읽어오기
         //'chat'노드의 child노드 중 내가 입장한 방의 데이터가 들어있는 곳에서 데이터들을 읽어오기
@@ -80,13 +82,12 @@ public class ChatActivity extends AppCompatActivity {
             //database에 뭔가 하나라도 변경되면 작동하는 event handler
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                 //새로 추가된 데이터(값 : MessageItem객체) 가져오기
                 MessageItem messageItem = dataSnapshot.getValue(MessageItem.class);
 
                 //새로운 메세지를 리스트뷰에 추가하기 위해 ArrayList에 추가
                 messageItemList.add(messageItem);
-
+                Log.d("Tag", String.valueOf(messageItemList.size()));  // life cycle 확인용
                 //채팅목록 리스트뷰를 갱신
                 adapter.notifyDataSetChanged();
                 messageListView.setSelection(messageItemList.size()-1); //리스트뷰의 마지막 위치로 스크롤 위치 이동
