@@ -123,12 +123,10 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         //유저 정보 해쉬맵 형태로 저장
                         HashMap<String, String> userInformation = new HashMap<>();
-                        String userRating = "0";
 
                         userInformation.put("userId", firebaseAuth.getUid());
                         userInformation.put("userEmail", inputEmail);
                         userInformation.put("userName", inputName);
-                        userInformation.put("userManner", userRating);
 
                         DatabaseReference database = FirebaseDatabase.getInstance().getReference();  //데이터 베이스에 접근 권한 갖기
 
