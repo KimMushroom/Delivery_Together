@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import android.widget.Toast;
@@ -23,12 +24,14 @@ public class LoginActivity extends AppCompatActivity {
     private String tag = "LoginActivity Message";
 
     private long backKeyPressedTime = 0;
+    private Boolean isAutoLoginCheck;
 
     private Button loginBtn;
     private Button forgot;
     private Button register;
     private EditText emailEditText;
     private EditText passwordEditText;
+    private CheckBox autoLoginCheckBox;
 
     private FirebaseAuth firebaseAuth;
 
@@ -44,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.inputPassword);
         forgot = (Button) findViewById(R.id.goForgotBtn);
         register = (Button) findViewById(R.id.goRegisterBtn);
+        autoLoginCheckBox=(CheckBox)findViewById(R.id.isAutoLogin);
 
         firebaseAuth = firebaseAuth.getInstance();//firebaseAuth의 인스턴스를 가져옴
 
@@ -55,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 String email = emailEditText.getText().toString().trim();
                 String pwd = passwordEditText.getText().toString().trim();
+                isAutoLoginCheck=autoLoginCheckBox.isChecked();
 
                 if (email.length() == 0) {
                     Toast.makeText(getApplicationContext(), "이메일을 입력하세요", Toast.LENGTH_SHORT).show();
@@ -71,7 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d(tag, "Login Success");  // 로그인 성공
 
                                 //로그인 화면은 닫고 메인 화면으로 넘어감
+                                //자동 로그인 체크 유무 값 넘김
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("autoLogin",isAutoLoginCheck);
+
                                 startActivity(intent);
                                 finish();
                             }
@@ -186,6 +194,8 @@ public class LoginActivity extends AppCompatActivity {
             // 로그인 페이지는 닫아서 메인 페이지에서 나가면 앱이 종료되게 함
         else {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("autoLogin",true);
+
             startActivity(intent);
             finish();
         }

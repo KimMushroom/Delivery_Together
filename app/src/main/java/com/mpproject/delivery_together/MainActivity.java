@@ -28,9 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private String tag = "MainActivity Message";
 
     private long backKeyPressedTime = 0;
+    private Boolean autoLogin;
 
     private RecyclerAdapter adapter;
     private Button writeBtn;
+    private Button logoutBtn; //임시 로그아웃 기능하는 버튼(나중에 마이 프로필에 로그아웃 기능 추가)
 
     private List<String> titleList = new ArrayList<String>();  //게시물 제목
     private List<String> contentList = new ArrayList<String>();  //게시물 내용
@@ -46,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(lifeCycleTag, "In the onCreate() event");  // life cycle 확인용
 
-        //화면 초기화
-        //getData();
+        Intent callIntent=getIntent();
+        autoLogin=callIntent.getBooleanExtra("autoLogin",false);
 
         database = FirebaseDatabase.getInstance().getReference("post");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -96,6 +98,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        logoutBtn=(Button)findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                firebaseAuth.signOut();
+                finish();
+            }
+        });
     }
 
     @Override
@@ -132,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(lifeCycleTag, "In the onDestroy() event");  // life cycle 확인용
+
+        //자동 로그인이 체크 되있지 않았다면 종료할 때 로그아웃함
+        if(firebaseAuth.getCurrentUser()!=null&&autoLogin==false)
+            firebaseAuth.signOut();
     }
 
     @Override
@@ -150,7 +166,9 @@ public class MainActivity extends AppCompatActivity {
         // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2.5초를 더해 현재 시간과 비교 후
         // 마지막으로 뒤로 가기 버튼을 눌렀던 시간이 2.5초가 지나지 않았으면 종료
         if (System.currentTimeMillis() <= backKeyPressedTime + 2500) {
-            firebaseAuth.signOut();
+            if(autoLogin==false)
+                firebaseAuth.signOut();
+
             finish();
         }
     }
