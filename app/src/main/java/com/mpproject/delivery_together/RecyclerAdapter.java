@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
    //item list
     private ArrayList<RecyclerItem> postList = new ArrayList();
+    private ArrayList<RecyclerItem> searchList = new ArrayList();
 
     public interface OnItemClickListener
     {
