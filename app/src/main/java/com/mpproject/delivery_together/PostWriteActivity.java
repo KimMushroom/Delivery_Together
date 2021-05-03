@@ -5,8 +5,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,6 +55,7 @@ public class PostWriteActivity extends AppCompatActivity {
                 //게시글의 정보를 가져온다
                 EditText titleEditText = (EditText) findViewById(R.id.writeTitle);
                 EditText contentEditText = (EditText) findViewById(R.id.writeContent);
+
 
                 //작성할 게시물 정보 가져옴
                 uid=firebaseAuth.getUid();

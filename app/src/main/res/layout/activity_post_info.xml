@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#EDB8CA"
+    >
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -12,6 +14,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/posttitle"
         android:background="@drawable/edge"
+        android:backgroundTint="#EDB8CA"
+        android:fontFamily="@font/binggrae2_bold"
+        android:padding="8sp"
        android:textSize="35sp"/>
     <View
         android:layout_width="match_parent"
@@ -22,27 +27,32 @@
         android:layout_height="500sp"
         android:id="@+id/postcontent"
         android:background="@drawable/edge"
+        android:backgroundTint="#EDB8CA"
+        android:fontFamily="@font/binggrae2_bold"
+        android:padding="8sp"
         android:textSize="25sp"
         />
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
-</LinearLayout>
 
-<LinearLayout
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="#D3A1B2"
+        android:gravity="center"
         android:orientation="horizontal"
         android:padding="10dp">
-
 
         <Button
             android:id="@+id/postback"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:fontFamily="@font/binggrae2_bold"
             android:background="@color/pink"
             android:text="back" />
 
@@ -55,8 +65,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/pink"
-            android:text="Delete"
-            android:enabled="false"/>
+            android:fontFamily="@font/binggrae2_bold"
+            android:enabled="false"
+            android:text="Delete" />
 
         <View
             android:layout_width="20dp"
@@ -66,9 +77,8 @@
             android:id="@+id/chat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/binggrae2_bold"
             android:background="@color/pink"
             android:text="Chat" />
     </LinearLayout>
-
-
 </LinearLayout>

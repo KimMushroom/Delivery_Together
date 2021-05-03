@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="주문 모집 작성"
+            android:fontFamily="@font/binggrae2_bold"
             android:textSize="20sp"
 
             tools:ignore="NotSibling" />
@@ -59,7 +60,7 @@
                     android:id="@+id/writeTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:hint=" TITLE "
                     android:textSize="52sp"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -70,21 +71,23 @@
                     android:id="@+id/writeContent"
                     android:layout_width="match_parent"
                     android:layout_height="105dp"
-                    android:hint="내용 입력"
+                    android:hint="Content"
+
                     android:maxLines="1"
                     android:textSize="32sp" />
+
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:background="@color/pink"
                     android:gravity="center"
                     android:padding="10dp"
+                    android:fontFamily="@font/binggrae2_bold"
                     android:text="성별 선택"
-                    android:background="@color/pink"
 
                     />
-
 
                 <RadioGroup
                     android:id="@+id/radioGroup"
@@ -99,7 +102,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="무관" />
+                        android:text="무관"
+                        android:fontFamily="@font/binggrae2_bold"/>
 
                     <RadioButton
                         android:id="@+id/rg_btn2"
@@ -107,7 +111,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="남성" />
+                        android:text="남성"
+                        android:fontFamily="@font/binggrae2_bold"/>
 
                     <RadioButton
                         android:id="@+id/rg_btn3"
@@ -115,7 +120,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="여성" />
+                        android:text="여성"
+                        android:fontFamily="@font/binggrae2_bold"/>
 
 
                 </RadioGroup>
@@ -126,6 +132,7 @@
                     android:layout_gravity="center"
                     android:padding="10dp"
                     android:text="모집 마감 시간"
+                    android:fontFamily="@font/binggrae2_bold"
                     android:gravity="center"
                     android:background="@color/pink"/>
 
@@ -145,6 +152,7 @@
                     android:gravity="center"
                     android:background="@color/pink"
                     android:padding="10dp"
+                    android:fontFamily="@font/binggrae2_bold"
                     android:text="픽업 장소" />
                 <WebView
                     android:id="@+id/webView_address"
@@ -187,6 +195,7 @@
             android:layout_marginLeft="20dp"
             android:background="@drawable/select_button"
             android:text="저장"
+            android:fontFamily="@font/binggrae2_bold"
             android:textColor="@android:color/white" />
 
         <Button
@@ -196,6 +205,7 @@
             android:layout_centerInParent="true"
             android:background="@drawable/select_button"
             android:text="삭제"
+            android:fontFamily="@font/binggrae2_bold"
             android:textColor="@android:color/white" />
 
         <Button
@@ -206,6 +216,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/select_button"
             android:text="닫기"
+            android:fontFamily="@font/binggrae2_bold"
             android:textColor="@android:color/white" />
 
     </RelativeLayout>

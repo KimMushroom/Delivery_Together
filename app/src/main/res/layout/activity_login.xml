@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffffff"
+    android:background="@drawable/login_back"
+
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
@@ -13,6 +14,7 @@
         android:background="@color/pink"
         android:gravity="center"
         android:text="Delivery Together"
+        android:fontFamily="@font/binggrae2_bold"
         android:layout_gravity="center_vertical"
         android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
 
@@ -28,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:gravity="left"
-            android:hint="이메일"
+            android:hint="E-mail"
+            android:fontFamily="@font/binggrae2_bold"
             android:padding="10dp"
             android:textSize="15dp" />
 
@@ -38,7 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:gravity="left"
-            android:hint="비밀번호"
+            android:hint="PassWord"
+            android:fontFamily="@font/binggrae2_bold"
             android:padding="10dp"
             android:textSize="15dp" />
 
@@ -47,7 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/pink"
+            android:background="@drawable/select_button"
+            android:fontFamily="@font/binggrae2_bold"
             android:text="확인" />
 
         <LinearLayout
@@ -60,8 +65,9 @@
                 android:id="@+id/goRegisterBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@color/pink"
+                android:layout_margin="10sp"
+                android:background="@drawable/select_button"
+                android:fontFamily="@font/binggrae2_bold"
                 android:text="회원가입" />
 
             <View
@@ -74,9 +80,10 @@
                 android:layout_width="143dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity=""
-                android:layout_margin="10dp"
-                android:background="@color/pink"
+                android:layout_margin="10sp"
+                android:background="@drawable/select_button"
                 android:gravity="center"
+                android:fontFamily="@font/binggrae2_bold"
                 android:text="이메일/비밀번호 찾기" />
 
         </LinearLayout>

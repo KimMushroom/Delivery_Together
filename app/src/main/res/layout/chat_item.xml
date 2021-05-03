@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="8dp"
+android:layout_marginLeft="4dp"
+android:layout_marginRight="4dp"
+android:layout_marginBottom="4dp"
+app:cardBackgroundColor="#F8E16B"
+app:cardCornerRadius="10dp"
+app:cardElevation="5dp">
+
+<LinearLayout
+    android:id="@+id/layout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:visibility="visible"
+    android:background="#FFC107"
+
+    >
+
+    <ImageView
+        android:id="@+id/ImageView2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:padding="5dp"
+        app:srcCompat="@drawable/smile" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="#FFC107"
+        >
+
+        <TextView
+            android:id="@+id/ChatRoomTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TITLE"
+            android:textSize="24sp"
+            android:background="#FFC107"
+            android:fontFamily="@font/binggrae_bold"
+
+            />
+
+        <TextView
+            android:id="@+id/Participants"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="nicknames"
+            android:textSize="24sp"
+            android:background="#FFC107"
+            android:fontFamily="@font/binggrae_bold"
+            />
+
+        <TextView
+            android:id="@+id/lastMsgTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="last msg sent Time"
+            android:textSize="18sp"
+            android:background="#FFC107"
+            android:fontFamily="@font/binggrae_bold"
+            />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

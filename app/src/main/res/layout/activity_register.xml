@@ -3,15 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#ffffff"
+    android:background="#ECCD72"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
         android:id="@+id/registerTextView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_gravity="center_vertical"
+        android:background="#FBBCD1"
+        android:fontFamily="@font/binggrae2_bold"
         android:gravity="center"
-        android:text="회원가입"/>
+        android:text="회원가입"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +30,7 @@
             android:padding="10dp"
             android:gravity="left"
             android:textSize="15dp"
+            android:fontFamily="@font/binggrae_bold"
             android:hint="이름"/>
 
         <TableLayout
@@ -40,6 +45,7 @@
                     android:layout_margin="5dp"
                     android:padding="10dp"
                     android:gravity="left"
+                    android:fontFamily="@font/binggrae_bold"
                     android:textSize="15dp"
                     android:hint="전화번호"
                     android:layout_weight="3"/>
@@ -49,6 +55,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="인증번호 보내기"
+                    android:background="@drawable/select_button2"
+                    android:fontFamily="@font/binggrae2_bold"
                     android:layout_weight="1"/>
             </TableRow>
 
@@ -61,6 +69,7 @@
                     android:padding="10dp"
                     android:gravity="left"
                     android:textSize="15dp"
+                    android:fontFamily="@font/binggrae_bold"
                     android:hint="인증번호"
                     android:layout_weight="3"/>
 
@@ -69,6 +78,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="인증하기"
+                    android:fontFamily="@font/binggrae2_bold"
+                    android:background="@drawable/select_button2"
+
                     android:layout_weight="1"/>
             </TableRow>
 
@@ -84,6 +96,7 @@
             android:padding="10dp"
             android:gravity="left"
             android:textSize="15dp"
+            android:fontFamily="@font/binggrae_bold"
             android:hint="이메일"/>
 
         <EditText
@@ -94,6 +107,7 @@
             android:padding="10dp"
             android:gravity="left"
             android:textSize="15dp"
+            android:fontFamily="@font/binggrae_bold"
             android:hint="비밀번호"/>
 
         <EditText
@@ -104,6 +118,7 @@
             android:padding="10dp"
             android:gravity="left"
             android:textSize="15dp"
+            android:fontFamily="@font/binggrae_bold"
             android:hint="비밀번호 확인"/>
 
         <Button
@@ -111,6 +126,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:fontFamily="@font/binggrae2_bold"
+            android:background="@drawable/select_button2"
             android:text="확인"/>
     </LinearLayout>
 

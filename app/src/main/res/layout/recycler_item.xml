@@ -1,32 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:gravity="center_vertical"
-    android:layout_marginBottom="8dp"
-    android:background="@android:color/white">
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="#ffffffff"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp">
 
-        <TextView
-            android:id="@+id/postTitleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:text="TITLE"
-            android:textSize="15sp"
-            android:textColor="@android:color/black"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/postContentTextView"
+        <LinearLayout
+            android:id="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:text="content"
-            android:textSize="13sp"
-            android:textColor="@android:color/darker_gray"/>
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:background="#ffccff"
+            >
+
+                <ImageView
+                    android:id="@+id/ImageView"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_vertical"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/cookie" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:background="#ffccff"
+                    >
+
+                        <TextView
+                            android:id="@+id/postTitleTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TITLE"
+                            android:textSize="24sp"
+                            android:fontFamily="@font/binggrae_bold"
+                            android:background="#ffccff"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/postContentTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="content"
+                            android:textSize="24sp"
+                            android:background="#ffccff"
+                            android:fontFamily="@font/binggrae_bold"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:background="#ffccff">
+
+                                <TextView
+                                    android:id="@+id/genderTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="gender"
+                                    android:textSize="16sp"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:background="#ffccff"
+                                    android:fontFamily="@font/binggrae_bold"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/locationTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:text="address"
+                                    android:background="#ffccff"
+                                    android:fontFamily="@font/binggrae_bold"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/dateTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="20dp"
+                                    android:text="deadline"
+                                    android:fontFamily="@font/binggrae_bold"
+                                    android:textColor="#FF0000FF"
+                                    android:textSize="16sp" />
 
 
-</LinearLayout>
+                        </LinearLayout>
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

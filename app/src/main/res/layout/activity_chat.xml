@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_weight="1"
+        android:background="@drawable/back"
         android:divider="#ff00ff"
         android:dividerHeight="0dp"/>
     <LinearLayout
@@ -29,6 +30,7 @@
             android:layout_weight="1"
             android:hint="Input message"
             android:inputType="textMultiLine"
+            android:fontFamily="@font/binggrae2_bold"
             android:padding="10dp"
             android:maxLines="3"
             android:background="@drawable/back_login"/>
@@ -37,9 +39,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:backgroundTint="#ED86A9"
+            android:backgroundTint="#EDB8CA"
             android:onClick="clickSend"
-            android:text="send" />
+            android:text="send"
+            android:fontFamily="@font/binggrae2_bold"
+            />
     </LinearLayout>>
 
 </LinearLayout>
