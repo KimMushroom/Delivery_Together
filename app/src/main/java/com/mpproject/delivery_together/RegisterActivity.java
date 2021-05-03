@@ -12,16 +12,23 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -30,6 +37,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Button registerBtn;
     private EditText nameEditText;
+    private EditText nicknameEditText;
+    private RadioGroup genderRadio;
+    private RadioButton isMale;
+    private RadioButton isFemale;
     private EditText emailEditText;
     private EditText passwordEditText;
     private EditText checkEditText;
@@ -92,11 +103,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void signUp() {
         nameEditText = (EditText) findViewById(R.id.user_name);
+        nicknameEditText=(EditText)findViewById(R.id.user_nickname);
+        genderRadio=(RadioGroup)findViewById(R.id.genderCheck);
+        isMale=(RadioButton)findViewById(R.id.isMale);
+        isFemale=(RadioButton)findViewById(R.id.isFemale);
         emailEditText = (EditText) findViewById(R.id.user_id);
         passwordEditText = (EditText) findViewById(R.id.user_password);
         checkEditText = (EditText) findViewById(R.id.user_password_check);
 
         String inputName = nameEditText.getText().toString().trim();
+        String inputNickname=nicknameEditText.getText().toString().trim();
+        int radioId=genderRadio.getCheckedRadioButtonId();
         String inputEmail = emailEditText.getText().toString().trim();
         String inputPwd = passwordEditText.getText().toString().trim();
         String inputCheckPwd = checkEditText.getText().toString().trim();
@@ -105,15 +122,23 @@ public class RegisterActivity extends AppCompatActivity {
         if (inputName.length() == 0)
             Toast.makeText(getApplicationContext(), "이름을 입력하세요", Toast.LENGTH_SHORT).show();
 
-            //이메일 입력 안했을 때
+        //닉네임 입력 안했을 때
+        else if(inputNickname.length()==0)
+            Toast.makeText(getApplicationContext(), "닉네임을 입력하세요", Toast.LENGTH_SHORT).show();
+
+        //남,녀 체크를 안했을 때
+        else if(radioId!=isMale.getId()&&radioId!=isFemale.getId())
+            Toast.makeText(getApplicationContext(), "남,녀 체크를 하세요", Toast.LENGTH_SHORT).show();
+
+        //이메일 입력 안했을 때
         else if (!isValidEmail(inputEmail))
             Toast.makeText(getApplicationContext(), "이메일을 잘못 입력하셨습니다", Toast.LENGTH_SHORT).show();
 
-            //비밀번호 입력 안했을 때
+        //비밀번호 입력 안했을 때
         else if (!isValidPassword(inputPwd, inputCheckPwd))
             Toast.makeText(getApplicationContext(), "비밀번호를 잘못 입력하셨습니다", Toast.LENGTH_SHORT).show();
 
-            //입력이 잘 되었을 때때
+        //입력이 잘 되었을 때때
         else {
             //회원가입 시도
             firebaseAuth.createUserWithEmailAndPassword(inputEmail, inputPwd).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -125,8 +150,12 @@ public class RegisterActivity extends AppCompatActivity {
                         HashMap<String, String> userInformation = new HashMap<>();
 
                         userInformation.put("userId", firebaseAuth.getUid());
-                        userInformation.put("userEmail", inputEmail);
                         userInformation.put("userName", inputName);
+                        userInformation.put("userNickname",inputNickname);
+                        userInformation.put("userManner","3");
+                        userInformation.put("userGender",radioId==isMale.getId()?"남":"여");
+                        userInformation.put("userEmail", inputEmail);
+
 
                         DatabaseReference database = FirebaseDatabase.getInstance().getReference();  //데이터 베이스에 접근 권한 갖기
 

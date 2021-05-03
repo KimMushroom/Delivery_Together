@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".myProfileActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/profileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이름"/>
+
+    <TextView
+        android:id="@+id/profileNickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="별명"/>
+
+    <TextView
+        android:id="@+id/profilePhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전화번호"/>
+
+    <TextView
+        android:id="@+id/profileMannerScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="매너 지수"/>
+
+    <Button
+        android:id="@+id/changeInfoBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정보 수정"/>
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"/>
+
+
+</LinearLayout>

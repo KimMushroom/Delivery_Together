@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerAdapter adapter;
     private Button writeBtn;
-    private Button logoutBtn; //임시 로그아웃 기능하는 버튼(나중에 마이 프로필에 로그아웃 기능 추가)
+    private Button myProfileBtn; //임시 마이프로필 가는 버튼
 
     private List<String> titleList = new ArrayList<String>();  //게시물 제목
     private List<String> contentList = new ArrayList<String>();  //게시물 내용
@@ -99,13 +99,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        logoutBtn=(Button)findViewById(R.id.logoutBtn);
-        logoutBtn.setOnClickListener(new View.OnClickListener(){
-
+        myProfileBtn=(Button)findViewById(R.id.myProfileBtn);
+        myProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseAuth.signOut();
-                finish();
+                Intent goProfileIntent=new Intent(getApplicationContext(),myProfileActivity.class);
+                startActivity(goProfileIntent);
             }
         });
     }
@@ -114,6 +113,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.d(lifeCycleTag, "In the onStart() event");  // life cycle 확인용
+
+        if(firebaseAuth.getCurrentUser()==null)
+            finish();
     }
 
     @Override
