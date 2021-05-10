@@ -56,10 +56,12 @@ public class ChatAdapter extends BaseAdapter {
         TextView tvName= itemView.findViewById(R.id.tv_name);
         TextView tvMsg= itemView.findViewById(R.id.tv_msg);
         TextView tvTime= itemView.findViewById(R.id.tv_time);
+        TextView tvRead=itemView.findViewById(R.id.tv_read);
 
         tvName.setText(item.getName());
         tvMsg.setText(item.getMessage());
         tvTime.setText(item.getTime());
+//        tvRead.setText(item.getRead());
 
         return itemView;
     }

@@ -62,7 +62,7 @@ public class PostWriteActivity extends AppCompatActivity {
                 inputGender=0;  //임의값
 
                 //정보 HashMap 형태로 저장
-                HashMap<String,String>newPost=new HashMap<>();
+                HashMap<String,String>newPost=new HashMap<String, String>();
                 newPost.put("uid",uid);
                 newPost.put("title",inputTitle);
                 newPost.put("content",inputContent);

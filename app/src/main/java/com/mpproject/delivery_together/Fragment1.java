@@ -39,7 +39,7 @@ public class Fragment1 extends Fragment {
     private List<String> titleList = new ArrayList<String>();  //게시물 제목
     private List<String> contentList = new ArrayList<String>();  //게시물 내용
     private List<String> keyList = new ArrayList<String>();  //게시물 키값
-    private List<String> uidList = new ArrayList<>();  //게시물 작성자 id
+    private List<String> uidList = new ArrayList<String>();  //게시물 작성자 id
 
     private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
@@ -50,7 +50,7 @@ public class Fragment1 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
+        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
 
         database = FirebaseDatabase.getInstance().getReference("post");
         firebaseAuth = FirebaseAuth.getInstance();

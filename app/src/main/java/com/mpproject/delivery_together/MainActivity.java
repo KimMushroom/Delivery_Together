@@ -43,9 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Fragment1 fragment1;
-        Fragment2 fragment2;
-        Fragment3 fragment3;
+        final Fragment1 fragment1;
+        final Fragment2 fragment2;
+        final Fragment3 fragment3;
 
 
 

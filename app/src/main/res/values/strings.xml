@@ -7,4 +7,6 @@
     <string name="F1">Fragment1</string>
     <string name="F2">Fragment2</string>
     <string name="F3">Fragment3</string>
+    <string name="enter_message">님이 입장하셨습니다.</string>
+
 </resources>

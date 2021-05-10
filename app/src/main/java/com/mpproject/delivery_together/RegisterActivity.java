@@ -96,8 +96,8 @@ public class RegisterActivity extends AppCompatActivity {
         passwordEditText = (EditText) findViewById(R.id.user_password);
         checkEditText = (EditText) findViewById(R.id.user_password_check);
 
-        String inputName = nameEditText.getText().toString().trim();
-        String inputEmail = emailEditText.getText().toString().trim();
+        final String inputName = nameEditText.getText().toString().trim();
+        final String inputEmail = emailEditText.getText().toString().trim();
         String inputPwd = passwordEditText.getText().toString().trim();
         String inputCheckPwd = checkEditText.getText().toString().trim();
 
@@ -122,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         //유저 정보 해쉬맵 형태로 저장
-                        HashMap<String, String> userInformation = new HashMap<>();
+                        HashMap<String, String> userInformation = new HashMap<String, String>();
                         String userRating = "0";
 
                         userInformation.put("userId", firebaseAuth.getUid());
