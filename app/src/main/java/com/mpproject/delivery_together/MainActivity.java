@@ -2,6 +2,8 @@ package com.mpproject.delivery_together;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private long backKeyPressedTime = 0;
     private Boolean autoLogin;
+    private EditText searchedit;
 
     private RecyclerAdapter adapter;
     private Button writeBtn;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> contentList = new ArrayList<String>();  //게시물 내용
     private List<String> keyList = new ArrayList<String>();  //게시물 키값
     private List<String> uidList = new ArrayList<>();  //게시물 작성자 id
+
 
     private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
@@ -107,6 +112,26 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 firebaseAuth.signOut();
                 finish();
+            }
+        });
+        searchedit=(EditText)findViewById(R.id.searchEdit);
+        searchedit.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,
+                                          int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                      int arg3) {
+                adapter.getFilter().filter(arg0);
             }
         });
 

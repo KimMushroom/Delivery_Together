@@ -4,17 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> implements Filterable{
    //item list
     private ArrayList<RecyclerItem> postList = new ArrayList();
     private ArrayList<RecyclerItem> searchList = new ArrayList();
+    private int index;
 
     public interface OnItemClickListener
     {
@@ -43,19 +47,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     //item을 하나하나 보여주는(=bind) 함수
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.onBind(postList.get(position));
+        holder.onBind(searchList.get(position));
     }
 
     //recyclerView의 총 개수
     @Override
     public int getItemCount() {
-        return postList.size();
+        return searchList.size();
     }
 
     //item을 추가했을 때 쓰는 함수
     void addItem(RecyclerItem data)
     {
         postList.add(data);
+        searchList.add(data);
     }
 
     //subView 세팅해주는거
@@ -73,13 +78,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     int pos = getAdapterPosition();
+                    RecyclerItem itematposition=new RecyclerItem();
+                    itematposition= searchList.get(pos);
+                    int position= postList.indexOf(itematposition);
+
                     if(pos != RecyclerView.NO_POSITION){
                         if(mListener==null)
                         {
                             System.out.println("NUll");
                         }
                         if(mListener!=null) {
-                            mListener.onItemClick(v, pos);
+                            mListener.onItemClick(v, position);
                         }
                     }
                 }
@@ -91,6 +100,39 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             content.setText(data.getCont());
 
         }
+    }
+
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                index=0;
+                String charString = constraint.toString();
+                if(charString.isEmpty()) {
+                    searchList = postList;
+                } else {
+                    ArrayList<RecyclerItem> filteringList = new ArrayList<>();
+                    for(RecyclerItem potion : postList) {
+                        String name = potion.getTitle();
+                        index++;
+                        System.out.println("name"+name);
+                        if(name.toLowerCase().contains(charString.toLowerCase())) {
+                            filteringList.add(potion);
+                        }
+                    }
+                    searchList = filteringList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = searchList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                searchList = (ArrayList<RecyclerItem>)results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
 }

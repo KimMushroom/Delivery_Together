@@ -110,6 +110,8 @@ public class PostInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
     @Override
