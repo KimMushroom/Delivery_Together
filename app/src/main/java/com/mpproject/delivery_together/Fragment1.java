@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -45,6 +47,7 @@ public class Fragment1 extends Fragment {
     private FirebaseAuth firebaseAuth;
 
 
+
     Context context;
     OnTabItemSelectedListener listener;
 
@@ -55,6 +58,7 @@ public class Fragment1 extends Fragment {
         database = FirebaseDatabase.getInstance().getReference("post");
         firebaseAuth = FirebaseAuth.getInstance();
         database.addValueEventListener(new ValueEventListener() {
+
 
             //게시물 데이터베이스 값 변동시 발생
             @Override

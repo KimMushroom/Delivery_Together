@@ -2,10 +2,14 @@ package com.mpproject.delivery_together;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigation;
 
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         Fragment1 fragment1;
         Fragment2 fragment2;
         Fragment3 fragment3;
-
 
 
         //oncreate()안에 각각 객체로 만들어 변수에 할당
@@ -109,8 +113,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (position == 2) {
             bottomNavigation.setSelectedItemId(R.id.tab3);
         }
+
+
     }
-
 }
-
-
