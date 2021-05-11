@@ -1,22 +1,31 @@
 package com.mpproject.delivery_together;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+
+import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 //채팅객체 어레이리스트 관리
 public class ChatAdapter extends BaseAdapter {
-
+    private DatabaseReference ref;
     ArrayList<MessageItem> messageItems;
     LayoutInflater layoutInflater;
+    int readCnt = 0;
 
-    FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     public ChatAdapter(ArrayList<MessageItem> messageItems, LayoutInflater layoutInflater) {
         this.messageItems = messageItems;
@@ -43,25 +52,25 @@ public class ChatAdapter extends BaseAdapter {
 
         //현재 보여줄 번째의(position)의 데이터로 뷰를 생성
         MessageItem item = messageItems.get(position);
-        View itemView=null;
+        View itemView = null;
 
         //메세지가 내 메세지인지 다른 사람의 메세지인지 구분해서 xml연결
-        if(item.getName().equals(firebaseAuth.getUid())){
-            itemView= layoutInflater.inflate(R.layout.my_msgbox,viewGroup,false);
-        }else{
-            itemView= layoutInflater.inflate(R.layout.other_msgbox,viewGroup,false);
+        if (item.getName().equals(firebaseAuth.getUid())) {
+            itemView = layoutInflater.inflate(R.layout.my_msgbox, viewGroup, false);
+        } else {
+            itemView = layoutInflater.inflate(R.layout.other_msgbox, viewGroup, false);
         }
 
         //만들어진 itemView에 값들 설정
-        TextView tvName= itemView.findViewById(R.id.tv_name);
-        TextView tvMsg= itemView.findViewById(R.id.tv_msg);
-        TextView tvTime= itemView.findViewById(R.id.tv_time);
-        TextView tvRead=itemView.findViewById(R.id.tv_read);
+        TextView tvName = itemView.findViewById(R.id.tv_name);
+        TextView tvMsg = itemView.findViewById(R.id.tv_msg);
+        TextView tvTime = itemView.findViewById(R.id.tv_time);
+        TextView tvRead = itemView.findViewById(R.id.tv_read);
 
         tvName.setText(item.getName());
         tvMsg.setText(item.getMessage());
         tvTime.setText(item.getTime());
-//        tvRead.setText(item.getRead());
+        tvRead.setText(item.getRead());
 
         return itemView;
     }

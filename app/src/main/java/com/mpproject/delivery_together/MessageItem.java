@@ -1,18 +1,20 @@
 package com.mpproject.delivery_together;
 
+import java.util.HashMap;
+
 //메세지 담아놓을 객체
 public class MessageItem {
 
     String name;
     String message;
     String time;
-//    int read;
+    HashMap<String, Boolean> readUsers; //메세지를 읽은 사람들
 
-    public MessageItem(String name, String message, String time) {
+    public MessageItem(String name, String message, String time, HashMap<String, Boolean> read) {
         this.name = name;
         this.message = message;
         this.time = time;
-//        this.read = read;
+        this.readUsers = read;
 
     }
 
@@ -20,7 +22,7 @@ public class MessageItem {
         this.name = name;
         this.message = message;
         this.time="0:0";
-//        this.read=0;
+        this.readUsers = null;
     }
 
     //firebase DB에 객체로 값을 읽어올 때
@@ -42,5 +44,5 @@ public class MessageItem {
         return time;
     }
 
-//    public int getRead(){ return read; }
+    public int getRead(){ return readUsers.size(); }
 }
