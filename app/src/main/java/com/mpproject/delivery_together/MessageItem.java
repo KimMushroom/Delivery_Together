@@ -8,27 +8,36 @@ public class MessageItem {
     String name;
     String message;
     String time;
-    HashMap<String, Boolean> readUsers; //메세지를 읽은 사람들
+    HashMap<String, Boolean> readUsers;
 
-    public MessageItem(String name, String message, String time, HashMap<String, Boolean> read) {
+    int read;
+
+    public MessageItem(String name, String message, String time, int read, HashMap <String, Boolean>readUsers) {
         this.name = name;
         this.message = message;
         this.time = time;
-        this.readUsers = read;
-
+        this.read = read;
+        this.readUsers = readUsers;
     }
 
     public MessageItem(String name, String message) {
         this.name = name;
         this.message = message;
         this.time="0:0";
-        this.readUsers = null;
+        this.read = 0;
     }
 
     //firebase DB에 객체로 값을 읽어올 때
     //파라미터가 비어있는 생성자가 필요함.
     public MessageItem() {
 
+    }
+
+    public MessageItem(String name, String message, String time, HashMap<String, Boolean> readUsers) {
+        this.name = name;
+        this.message = message;
+        this.time = time;
+        this.readUsers = readUsers;
     }
 
     //Getter & Setter
@@ -44,5 +53,5 @@ public class MessageItem {
         return time;
     }
 
-    public int getRead(){ return readUsers.size(); }
+    public int getRead(){ return read; }
 }

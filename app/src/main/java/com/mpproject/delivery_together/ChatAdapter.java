@@ -23,7 +23,7 @@ public class ChatAdapter extends BaseAdapter {
     private DatabaseReference ref;
     ArrayList<MessageItem> messageItems;
     LayoutInflater layoutInflater;
-    int readCnt = 0;
+
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -55,9 +55,12 @@ public class ChatAdapter extends BaseAdapter {
         View itemView = null;
 
         //메세지가 내 메세지인지 다른 사람의 메세지인지 구분해서 xml연결
-        if (item.getName().equals(firebaseAuth.getUid())) {
+        if (item.getName().equals(firebaseAuth.getUid()))
+        {
             itemView = layoutInflater.inflate(R.layout.my_msgbox, viewGroup, false);
-        } else {
+        }
+        else
+            {
             itemView = layoutInflater.inflate(R.layout.other_msgbox, viewGroup, false);
         }
 
@@ -70,7 +73,7 @@ public class ChatAdapter extends BaseAdapter {
         tvName.setText(item.getName());
         tvMsg.setText(item.getMessage());
         tvTime.setText(item.getTime());
-        tvRead.setText(item.getRead());
+        tvRead.setText(String.valueOf(item.getRead()));
 
         return itemView;
     }

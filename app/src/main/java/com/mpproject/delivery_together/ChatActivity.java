@@ -53,8 +53,9 @@ public class ChatActivity extends AppCompatActivity {
 
 
     private int peopleCnt = 0; //읽음표시 확인용
-    private Map<String, Object> readUserMap = new HashMap<String, Object>();
     private String mapKey;
+    private HashMap<String, Boolean> readUsers = new HashMap<String, Boolean>();
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,81 +89,97 @@ public class ChatActivity extends AppCompatActivity {
 
 
         //채팅방에 처음 입장했을 때
-        //1.roomUser-room+chatKey에서 참여목록 불러오기
-        // 2-1.if (chatUserList에 내가 없다면) 처음 입장 -> 00님이 입장하셨습니다
+        //1. chatUserList에 user 저장, 방에 총 몇 명인지 peopleCnt에 저장
+        //2-1.if (chatUserList에 내가 없다면) 처음 입장 -> 00님이 입장하셨습니다
         //2-2.else comment-user-myId == true 인 애들을 다 불러오기
-
-        //채팅방에 있는 유저리스트를 chatUserList에 저장
-        ref.child("chat").child("room" + chatKey).child("users").addValueEventListener(new ValueEventListener() {
+        ref.child("chat").child("room" + chatKey).child("comment").addChildEventListener(new ChildEventListener() {
+            //database에 뭔가 하나라도 변경되면 작동하는 event handler
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    String user = ds.getValue((String.class));
-                    chatUserList.add(user);
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                //새로 추가된 데이터(값 : MessageItem객체) 가져오기
 
-                }
-                peopleCnt = chatUserList.size();
+                MessageItem messageItem = dataSnapshot.getValue(MessageItem.class);
+
+                //새로운 메세지를 리스트뷰에 추가하기 위해 ArrayList에 추가
+                messageItemList.add(messageItem);
+                Log.d("Tag", String.valueOf(messageItemList.size()));  // life cycle 확인용
+                //채팅목록 리스트뷰를 갱신
+                adapter.notifyDataSetChanged();
+                messageListView.setSelection(messageItemList.size() - 1); //리스트뷰의 마지막 위치로 스크롤 위치 이동
             }
 
-            public void onCancelled(DatabaseError databaseError) {
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
-        //2-1.chatUserList에 내가 없다면 처음 입장 -> 00님이 입장하셨습니다
-        if (!chatUserList.contains(myId)) {
-            //room+chatKey에 myId추가
-            HashMap<String, Boolean> users = new HashMap<String, Boolean>();
-            users.put(myId, true);
+        ref.child("chat").child("room" + chatKey).child("users").addValueEventListener(new ValueEventListener() {
+            HashMap<String, Boolean> temp;
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    temp = (HashMap<String, Boolean>) ds.getValue();
 
-            ref.child("roomUser").child("room" + chatKey).child("users").push().setValue(users);
-            //넣어야할 지 모르겠네
-            chatUserList.add(myId);
+                }
+                for (String key : temp.keySet()) {
+                    chatUserList.add(key);
+                }
 
-            //******00님이 입장하셨습니다 추가하기*******
-        }
+                //2-1.chatUserList에 내가 없다면 처음 입장 -> 00님이 입장하셨습니다
+                if (!chatUserList.contains(myId)) {
+                    //node에 myId추가
+                    ref.child("roomUser").child("room" + chatKey).child("users").push().setValue(myId);
+                    chatUserList.add(myId);
+                    peopleCnt = chatUserList.size();
+                    //******00님이 입장하셨습니다 추가하기*******
+                } else {
+                    Log.d("있음 시발", "else");
+                }
+            }
 
-        //2-2 참여한 채팅방이라면 comment-readUsers에서 내id가 있는 애들을 다 불러오기
-        else {
-            //firebaseDB에서 채팅 메세지들 실시간 읽어오기
-            //'chat'노드의 child노드 중 내가 입장한 방의 데이터가 들어있는 곳에서 데이터들을 읽어오기
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-            //if id가 false인 애들은 다 true로 바꿔주기
-            ref.child("chat").child("room" + chatKey).addChildEventListener(new ChildEventListener() {
-                //database에 뭔가 하나라도 변경되면 작동하는 event handler
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    //새로 추가된 데이터(값 : MessageItem객체) 가져오기
-                    MessageItem messageItem = dataSnapshot.getValue(MessageItem.class);
+            }
 
-                    //새로운 메세지를 리스트뷰에 추가하기 위해 ArrayList에 추가
+        });
+
+        ref.child("roomUser").child("room" + chatKey).child("comment").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+                //새로 추가된 데이터(값 : MessageItem객체) 가져오기
+                messageItemList.clear();
+
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    MessageItem messageItem = ds.getValue(MessageItem.class);
+//                    readUsers.put(messageItem.readUsers);
                     messageItemList.add(messageItem);
-                    Log.d("Tag", String.valueOf(messageItemList.size()));  // life cycle 확인용
-                    //채팅목록 리스트뷰를 갱신
-                    adapter.notifyDataSetChanged();
-                    messageListView.setSelection(messageItemList.size() - 1); //리스트뷰의 마지막 위치로 스크롤 위치 이동
                 }
+                adapter.notifyDataSetChanged();
+                messageListView.setSelection(messageItemList.size() - 1);
+            }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
 
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                }
-
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                }
-            });
-
-
-        }
-
-
+        });
     }
 
     @Override
@@ -202,60 +219,72 @@ public class ChatActivity extends AppCompatActivity {
         Log.d(lifeCycleTag, "In the onDestroy() event");  // life cycle 확인용
     }
 
-    public void getMessageList() {
-        ref.child("roomUser").child("room" + chatKey).child("comment").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //새로 추가된 데이터(값 : MessageItem객체) 가져오기
-                messageItemList.clear();
+//    //메세지 가져오기
+//    public void getMessageList() {
+//
+//        ref.child("roomUser").child("room" + chatKey).child("comment").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                //새로 추가된 데이터(값 : MessageItem객체) 가져오기
+//                messageItemList.clear();
+//
+//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+//                    MessageItem messageItem = ds.getValue(MessageItem.class);
+//                    //readUsers.put(messageItem.readUsers);
+//                    messageItemList.add(messageItem);
+//                }
+//                adapter.notifyDataSetChanged();
+//                messageListView.setSelection(messageItemList.size() - 1);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//            }
+//
+//        });
+//    }
 
-                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    mapKey  = ds.getKey();
-                    MessageItem messageItem = dataSnapshot.getValue(MessageItem.class);
-                    messageItem.readUsers.put(myId, true);
-
-                    readUserMap.put(mapKey, messageItem);
-                    messageItemList.add(messageItem);
-                }
-
-                adapter.notifyDataSetChanged();
-                messageListView.setSelection(messageItemList.size() - 1);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-
-        });
-    }
-
-    public void checkReadCounter(final int position) {
-        //메세지마다 몇명이 보고 있는지 전달해줘야겠지
-        //chatList.size == 전체
-        //그 메세지의 readUser중 true인 사람을 받아와서 .size하면 == 읽은사람
-        //전체 - 읽은 사람 == 안읽은 사람
-        int readCnt = 0;
-        readUserMap.get(mapKey).;
-
-    }
-
+    //chatUserList에 user 저장, 방에 총 몇 명인지 peopleCnt에 저장
+//    public void countRoomUser()
+//    {
+//        //채팅방에 있는 유저리스트를 chatUserList에 저장
+//        ref.child("chat").child("room" + chatKey).child("users").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+//                    String user = ds.getValue((String.class));
+//                    chatUserList.add(user);
+//                }
+//                peopleCnt = chatUserList.size();
+//            }
+//
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+//    }
 
     public void clickSend(View view) {
         //firebase DB에 저장할 값들( 닉네임, 메세지, 시간)
         String nickName = myId;
         String message = myMessageEditText.getText().toString();
-        HashMap<String, Boolean> readUsers = null;
+
 
         //메세지 작성 시간 문자열로
         Calendar calendar = Calendar.getInstance(); //현재 시간을 가지고 있는 객체
         String time = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
-        //읽은 사람 표시
-        readUsers.put(myId, true);
-        //firebase DB에 저장할 값(MessageItem객체) 설정
-        MessageItem messageItem = new MessageItem(nickName, message, time, readUsers);
 
+        //readUsers에
+        for (int i = 0; i < chatUserList.size(); i++) {
+            readUsers.put(chatUserList.get(i), false);
+        }
+        //내가 보낸 거니까 일단 나는 바로 읽지 ㅇㅈ?
+        readUsers.put(myId, true);
+
+        // 전체에서 일단 내가 본 거만 빼서 넘겨 default
+        int read = peopleCnt - readUsers.size();
+
+        //firebase DB에 저장할 값(MessageItem객체) 설정
+        MessageItem messageItem = new MessageItem(nickName, message, time, read, readUsers);
 
         //'chat'노드의 child노드에 MessageItem객체를 통해 추가
         ref.child("chat").child("room" + chatKey).child("comment").push().setValue(messageItem);
