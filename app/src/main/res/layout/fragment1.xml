@@ -5,8 +5,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="60dp"
     tools:context=".Fragment1">
+
+    <EditText
+        android:id="@+id/editSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="검색어를 입력하세요."
+        android:layout_margin="15sp"/>
 
 
     <RelativeLayout
@@ -41,7 +47,9 @@
             android:text="작성"
             android:textColor="@android:color/white" />
 
+
     </RelativeLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

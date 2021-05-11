@@ -3,13 +3,14 @@ package com.mpproject.delivery_together;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -37,15 +38,16 @@ public class Fragment1 extends Fragment {
 
     private RecyclerAdapter adapter;
     private Button writeBtn;
+    private EditText searchedit;
+
 
     private List<String> titleList = new ArrayList<String>();  //게시물 제목
     private List<String> contentList = new ArrayList<String>();  //게시물 내용
     private List<String> keyList = new ArrayList<String>();  //게시물 키값
-    private List<String> uidList = new ArrayList<>();  //게시물 작성자 id
+    private List<String> uidList = new ArrayList<String>();  //게시물 작성자 id
 
     private DatabaseReference database;
     private FirebaseAuth firebaseAuth;
-
 
 
     Context context;
@@ -53,7 +55,7 @@ public class Fragment1 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
+        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
 
         database = FirebaseDatabase.getInstance().getReference("post");
         firebaseAuth = FirebaseAuth.getInstance();
@@ -87,6 +89,26 @@ public class Fragment1 extends Fragment {
             }
 
             public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        searchedit=(EditText)rootView.findViewById(R.id.editSearch);
+        searchedit.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable arg0) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,
+                                          int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2,
+                                      int arg3) {
+                adapter.getFilter().filter(arg0);
             }
         });
         return rootView;
@@ -135,6 +157,8 @@ public class Fragment1 extends Fragment {
                 startActivity(intent);
             }
         });
+
+
 
         SwitchMultiButton switchButton = rootView.findViewById(R.id.switchButton);
         switchButton.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {

@@ -98,7 +98,7 @@ public class PostInfoActivity extends AppCompatActivity {
                 Log.d(tag, "Chat Button Clicked");  //채팅방 입장 버튼 눌림
 
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-                Bundle bundle=new Bundle();
+                Bundle bundle = new Bundle();
 
                 //채팅방 이름(게시물 key값), 사용자id 보냄
                 bundle.putString("key",postKey);
