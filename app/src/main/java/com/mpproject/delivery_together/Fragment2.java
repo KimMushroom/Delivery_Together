@@ -27,9 +27,7 @@ public class Fragment2 extends Fragment {
         private String uid;
         private ArrayList<ChatRoomItem> ChatRoomItem = new ArrayList<ChatRoomItem>();
 
-        public ChatRecylcerViewAdapter(){
-            uid = FirebaseAuth.getInstance()
-        }
+//        public ChatRecylcerViewAdapter(){ uid = FirebaseAuth.getInstance()}
 
         @NonNull
         @Override

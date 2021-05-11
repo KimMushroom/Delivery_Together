@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 //채팅하기 누르면 채팅방으로 참여
 //현재 나중에 들어오는 사람도 이전 채팅 내역을 볼 수 있음
 //채팅방에 들어왔을 때부터의 채팅 내역만 보이게 수정
@@ -50,6 +52,8 @@ public class ChatActivity extends AppCompatActivity {
     private boolean join = false;
     private String ss = "false";
     private int type = 0;
+
+    private int peopleCnt = 0; //읽음표시 확인용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,10 +204,24 @@ public class ChatActivity extends AppCompatActivity {
         Log.d(lifeCycleTag, "In the onDestroy() event");  // life cycle 확인용
     }
 
-    public void userRoomCheck()
+    public void setReadCounter(final int position, final TextView textView)
     {
+        if (peopleCnt == 0)
+        {
+            ref.child("roomUser").child("room" + chatKey).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Map<String, Boolean> users = (Map<String, Boolean>) snapshot.getValue();
+                    peopleCnt = users.size();
+                    int count = peopleCnt -
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
+        }
     }
     public void clickSend(View view) {
         //firebase DB에 저장할 값들( 닉네임, 메세지, 시간)
@@ -216,7 +234,7 @@ public class ChatActivity extends AppCompatActivity {
         int read = 0;
 
         //firebase DB에 저장할 값(MessageItem객체) 설정
-        MessageItem messageItem= new MessageItem(nickName,message,time, read);
+        MessageItem messageItem= new MessageItem(nickName,message,time);
 
         //'chat'노드의 child노드에 MessageItem객체를 통해 추가
         ref.child("chat").child("room"+chatKey).push().setValue(messageItem);

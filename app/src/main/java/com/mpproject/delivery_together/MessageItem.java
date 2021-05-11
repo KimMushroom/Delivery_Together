@@ -6,13 +6,13 @@ public class MessageItem {
     String name;
     String message;
     String time;
-    int read;
+//    int read;
 
-    public MessageItem(String name, String message, String time, int read) {
+    public MessageItem(String name, String message, String time) {
         this.name = name;
         this.message = message;
         this.time = time;
-        this.read = read;
+//        this.read = read;
 
     }
 
@@ -20,7 +20,7 @@ public class MessageItem {
         this.name = name;
         this.message = message;
         this.time="0:0";
-        this.read=0;
+//        this.read=0;
     }
 
     //firebase DB에 객체로 값을 읽어올 때
@@ -42,5 +42,5 @@ public class MessageItem {
         return time;
     }
 
-    public int getRead(){ return read; }
+//    public int getRead(){ return read; }
 }
