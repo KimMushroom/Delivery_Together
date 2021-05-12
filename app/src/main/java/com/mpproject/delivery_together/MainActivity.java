@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerAdapter adapter;
     private Button writeBtn;
     private Button logoutBtn; //임시 로그아웃 기능하는 버튼(나중에 마이 프로필에 로그아웃 기능 추가)
+    private Button searchBtn;
 
     private List<String> titleList = new ArrayList<String>();  //게시물 제목
     private List<String> contentList = new ArrayList<String>();  //게시물 내용
@@ -101,6 +102,16 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(tag, "Write Button Clicked");  //게시물 작성 버튼 클릭됨
 
                 Intent intent = new Intent(getApplicationContext(), PostWriteActivity.class);
+                startActivity(intent);
+            }
+        });
+        searchBtn = (Button) findViewById(R.id.searchBtn);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(tag, "Search Button Clicked");  //게시물 작성 버튼 클릭됨
+
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
                 startActivity(intent);
             }
         });
