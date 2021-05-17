@@ -6,14 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ChatActivity">
+
     <ListView
         android:id="@+id/lv"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/back"
         android:divider="#ff00ff"
-        android:dividerHeight="0dp"/>
+        android:dividerHeight="0dp" />
+
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"

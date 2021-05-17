@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EDB8CA">
+
+    <EditText
+        android:id="@+id/editSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="검색어를 입력하세요."
+        android:textSize="20sp"
+        android:layout_margin="15sp"/>
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" 거리 설정 "
+        android:textSize="20sp"
+        android:fontFamily="@font/binggrae_bold"
+        android:textAlignment="center"
+        />
+
+
+    <SeekBar
+        android:id="@+id/seek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="50"
+
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:id="@+id/genderSelect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" 성별 선택 "
+        android:textSize="20sp"
+        android:fontFamily="@font/binggrae_bold"
+        android:textAlignment="center"
+        />
+<RadioGroup
+    android:id="@+id/radioGroup"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal">
+
+    <RadioButton
+        android:id="@+id/sameGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/binggrae_bold"
+        android:text="나와 동일한 성별"></RadioButton>
+    <RadioButton
+        android:id="@+id/bothGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/binggrae_bold"
+        android:text="성별 무관"
+        ></RadioButton>
+</RadioGroup>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="50dp"
+        android:text="검색"
+        android:fontFamily="@font/binggrae_bold"
+        android:textSize="20sp"
+        />
+
+
+</LinearLayout>
