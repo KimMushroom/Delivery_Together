@@ -30,14 +30,14 @@ import java.util.List;
 import lib.kingja.switchbutton.SwitchMultiButton;
 
 
-public class Fragment1 extends Fragment {
+public class Fragment1 extends Fragment implements View.OnClickListener {
     private String lifeCycleTag = "Main Activity";
     private String tag = "MainActivity Message";
 
     private long backKeyPressedTime = 0;
 
     private RecyclerAdapter adapter;
-    private Button writeBtn;
+    private Button WriteBtn;
     private EditText searchedit;
 
 
@@ -111,6 +111,9 @@ public class Fragment1 extends Fragment {
                 adapter.getFilter().filter(arg0);
             }
         });
+
+
+
         return rootView;
     }
 
@@ -153,7 +156,7 @@ public class Fragment1 extends Fragment {
                 if (listener != null) {
                     listener.onTabSelected(1);
                 }
-                Intent intent = new Intent(context.getApplicationContext(), PostWriteActivity.class);
+               Intent intent = new Intent(context.getApplicationContext(), PostWriteActivity.class);
                 startActivity(intent);
             }
         });
@@ -208,32 +211,15 @@ public class Fragment1 extends Fragment {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        Button b = (Button)v;
 
-    private void initUI(ViewGroup rootView) {
-    /*'내용'과 '사진'중에서 선택했을 때, 어댑터의 switchLayout메서드를 호출하여 레이아웃바꿔줌.
-      작성 버튼을 누르면, 두번째 프래그먼트를 띄워줌.*/
+        switch(b.getId()){
+            case R.id.WriteBtn:
+            getActivity().startActivity(new Intent(getActivity(), PostWriteActivity.class));
+            break;
 
-        Button WriteBtn = rootView.findViewById(R.id.WriteBtn);
-        WriteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (listener != null) {
-                    listener.onTabSelected(1);
-                }
-            }
-        });
-
-        SwitchMultiButton switchButton = rootView.findViewById(R.id.switchButton);
-        switchButton.setOnSwitchListener(new SwitchMultiButton.OnSwitchListener() {
-            @Override
-            public void onSwitch(int position, String tabText) {
-                Toast.makeText(getContext(), tabText, Toast.LENGTH_SHORT).show();
-
-                adapter.switchLayout(position);
-                adapter.notifyDataSetChanged();
-            }
-        });
-
-
+        }
     }
 }
