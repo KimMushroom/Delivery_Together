@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Delivery_together">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCI5LDIbAn_giX3YmOt4EromVvpI9bmXI8" />
         <activity android:name=".SearchActivity"/>
         <activity android:name=".LoginActivity">
             <intent-filter>
