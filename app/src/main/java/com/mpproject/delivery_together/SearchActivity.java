@@ -51,7 +51,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class SearchActivity extends AppCompatActivity {
-    private GpsTracker gpsTracker;
     private GoogleMap mMap;
     private Marker currentMarker = null;
 
